@@ -1,0 +1,793 @@
+					
+every step explain  
+what ever they could ask for interview to explain. definations and all will be in "advance java full theory pdf"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Intellij Project  -  SpringBoot + Hybernate + API + Mapping/RDBMS + Spring Security - Blog app
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TECHNICAL FLOW OF THE PROJCET
+when we paste the url in POSTMAN while the project is running, JSON object gets created and supplied to the URL	
+
+	POSTMAN -(httpURL->DtoPayload)-> RestController -> Service -> entity -> Repository -> Database
+
+
+STEPS
+	
+	Ceated Spring projects using SpringIntializer with dependencies:
+			SpringBootDevTool	- live loading
+			Lambok - getters and setters
+			SpringWeb - REST
+			MysqlDriver - for DB connection
+			JPA - Hybernate
+
+	Create a database:
+
+	Create packages:	
+		entities
+		payload
+		repositories
+		service
+			impl
+		controller
+		Exception
+		config
+		security
+		util
+		
+
+	Create Post entity:
+			@OneToMany
+		PostDto (payload)
+		Postrepository (repositories)
+		PostServiceImpl (sevice)
+			ResourceNotFoundException
+			ModelMapper
+		PostController (controller)
+			ResponseEntity<>
+			Pagination (@RequestParam)
+			@PreAuthorize("hasRole('ADMIN')")
+
+	Create Comment entity: OneToMany Mapping with Post
+		CommentDto (payload)
+			@ManyToOne
+			@JoinColumn
+		CommentsRepository (repository)
+			findByPostId
+		CommentServiceImpl (service)
+			ResourceNotFoundException
+			BlogApiException
+			ModelMapper
+		CommentController (controller)
+			ResponseEntity<>
+			Pagination (@RequestParam)
+			@PreAuthorize("hasRole('ADMIN')")
+
+	Exception Handling (catch block part, try block part was done in service)
+		ErrorDetails (payload)
+		GlobalExceptionHandler (exceptions)
+			@ControllerAdvice
+			@ExceptionHandler
+
+	SpringSecurity
+		In Memory Authentication:(not used)
+		DataBase Authentication:
+			Roles(entity)	
+			User(entity)   do ManyToMany mapping with roles
+				@ManyToMany
+				@JoinTable - user_roles (table)
+				third table will get created automatically
+		RolesRepository (repository)
+		UserRepository (repository)
+		CustomUserDetailsService (secuiry)
+			@Service, spring seruvity class User etc.
+		SecurityConfig (config)
+			@Configuration
+			@EnableWebSecuirty
+			@EnableGlobalMethodSecurity(prePostEnabled = true)
+			password Encoder
+			httpBasic
+		PostController and CommentController(controller layer)
+    			@PreAuthorize("hasRole('ADMIN')")
+			
+			
+	SignIn
+		LoginDto (payload)
+		AuthController (controller)
+		SecuitryConfig (config)
+	SignUp
+		SignUpDto (payload)
+		AuthController (controller
+
+	JWT Token
+		add the dependency in prom.xml
+		Update application.properties file with JwtSecuirtyKey and expiration time.
+		JwtAuthenticationEntryPoint in secutiry package
+		JwtAuthenticationFilter
+		JwtTokenProvider
+		make changes to "sing-in" method in auth controller so that it returns token.
+		create class "JwtAuthResponse" in payload package.
+
+	Spring Validation
+		download the dependencies in prom.xml file
+		add whichever valadation annotations we want on Dto class.
+		make changes to the controller layer method -@Valid, BindingResult
+		
+		
+		
+		
+
+		
+		
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
+
+
+QUESTIONS: Read notebook notes and find more questions
+	
+	How did you develoup end points in your project?(aka API)
+
+	=>What are the different modules in this project?(not shure)
+	Developing Post and Comments entity and their respective dto, service, repository and controller layer.
+	Pagination and Sorting in Rest API
+	OneToMany mapping Comments API
+		Get All Comments By PostId
+		Get Comment By CommentId 
+		Developing Update Comment Rest API 
+		Delete Comment Feature 
+	Model Mapper library or MapStruct
+	Exceptions handling Specific Exceptions and Global Exceptions
+	Spring Validations 
+	Spring Security
+		In Memory Authentication
+		Spring Validations (Database Authentication)
+	Developing Signin Rest API 
+	Developing SignUp Feature Rest API 
+	Developing JWT Token 
+	
+	
+	=>what modules you develouped in this project?
+	Fucking all of them: ask whatever moFo.
+
+	
+
+
+Explain What all Java 8 Features you used in the project?
+
+	=>Explaing how you used ModelMapping
+	Used it in the MapToEntity and MapToDto method, to reduce the lines of codes in the service layer.
+	To implement it:
+		Downloaded its dependency
+		Created a @Bean of Model mapper in the @SpringBootApplicaton class as it is an object of an external library
+		Created an object of ModelMapper in Service layer using Constructor based injection and used the method map()
+		
+
+	=>OneToMany Mapping explain with project example
+	Used this concept while building relations between Post and Comments table.
+	Here One post Could have many Comments.
+	We used List/Set to represent many entity and object creation for one entity
+	@JoinColumn for Joining the two tables.
+	We joined the Primary-Key and They Forighen-key of the two tables.
+	More examples could be: One procuct many reviews.
+	
+	=>ManyToMany Mapping explain with project example
+	We Used this in our project while creating User and Roles table for spring security.
+	@ManyToMany @JoingTable and set of Roles table was used.
+	In this conscept we create a 3rd table "user_role" in DB.
+	
+	
+ManyToOne mapping explain with project example
+
+	Debugging in intellij:
+	right click on main() method and choose "Debug as Java Application"
+	in the console find the lines which I have written and are causing errors. They will be highlited in blue.
+	put break points on those lines, also put break points some lines above them.
+	
+
+	=>Paginations what it is where how you used it?
+	we use it to : Ristrict the number of data per page and we should be able to navigate through those pages 
+	To implement pagination concept we used:
+		@RequestParam to get pageNo, pageSize, sortBy and sortDir in the controller layer method findAll
+		then we made changes to the Service layer where we used class PageRequest.of to create pageable and supplied it to findAll method of repository
+	pagination works with JpaRepository. CurdRepository does not supprot pagination. 
+	finally I used coustom built REESPONSE OBJECT to return back the pagination output.
+
+	=>Technical flow of the project
+	Instead of front end we use POSTMAN, postman will call rest controller, whatever JSON oject we submited in postman will go to Dto via Http URL (Dto is
+	in payload package btw). RestController will call service layer, service layer will take dto object and convert it to eitity. Finally the entity object
+	is taken to repository and saved to the DataBase. Same happens in Reverse for retriving data (bidirectional)
+
+	=>RDBMS AND DBMS explain
+	DBMS(Database Management System)- here the complete data gets sotred in one table. If number of columns increase a lot it will cause performance issues.
+	RDBMS-(Relational Database Management System)- here they break down the table and they form the relations between the broken down tables using primary-key
+		and forighen-key.
+		In RDBMS there are mapping concepts like OneToMany, ManyToOne, and ManyToMany.
+		Whenever we do RDBMS there should be Forighen-key and primary-Key concept otherwise we won't be able to join.
+	
+	=>what is fetch? FetchType.LAZY? FetchType.EAGER?
+	Whenever I run the project the DB tables get loaded in the temporary key memory (cashe memory).
+	EAGER: If I use EAGER technique all the tables get loaded in the cashe memory, wether we are using it or not.
+	LAZY: If I use LAZY technique tables will be loaded in cashe only when they are needed by us.
+
+	=>CascadeType: 
+	If i make changes to parent table it should also reflect in child tables.
+
+	=>OrphanRemoval:
+	If I make changes to parent table, it should be reflected in the child table.
+
+	=>Spring Ioc working 
+	Is a place in SpringBoot which has the logic to do dependency injection. It has the logic to know what oject to create and inject in the reference variable.
+	This logic is ony for only Spring Classes not for external libraries.
+	
+
+
+	@SpringBootApplication
+	starting point of the project
+	configuraton class
+
+	@Component
+	when you apply @Component on any class that class is maintained and managed by springBoot.
+	spring boot takes care of the complete lifecycle of an object.
+	any class with this annotation will belong to Spring IOC also with other annotaions like @Service @Controller etc.
+	used this in EmailApi and used it in JWt token class
+
+	@Configuration ( i think)
+	this class is used with @Bean annotation only and acts as configuration class to configure oject of external library 
+
+	@Bean 
+	is applied on an method whenever we wanna create an object of external library class
+	we do this in configuration class (eg. @SpringBootApplicaton and @Configuraton) only 
+	We created an object of Model mapper in Service layer by configuring Model mapper in @SpringBootApplicaton class using @Bean annotation
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+LEEARN THIS SHIT IN API FOR INTERVIEW!!
+
+# What is an api?
+an api makes the backend code of the application common for all the front end technologies like angular, android, IOS
+an api helps us to integrate 2 different applicatons, which is nothing but web services
+
+# How did you secure your api?
+I used spring security to secure my api
+
+#How did you use spring security?
+firstly i went and added the security jar
+and then i created 2 tables, user and role table with many to many mapping,
+ wich consisted of roles and user consisted of username and password
+all the passwords that i will save it here would be in the form of encoded format for which i used password encoder technique to encode my password and save it in the DB
+then i developed the sign up and sign in feature
+
+how did you implement signup and sigh in feature?
+
+#did you use jwt token with this?
+yes sir i did use it after spring security so that once I sign-in it gives me the token so that all the further trancsactions i can carry out with that one token so that i need not sign in repeatedly
+
+(they will ask you to write codes)
+		
+#Can you write one of the code for API on notepad(verry important)
+you should know how to type the code on notepad. tyep the restController then the dto, service layer, repository, save. (any one of the Crud. mostly Create or delete)
+
+#Where have you used java 8 feature in your project?
+Stream api in service layer for getmapping to convert entity to Dto. i did this in a easy way using steream API
+
+#tell me what all http status code did you see?
+201 use for creating 
+200 for delete update read
+400 bad request response/ servier cant process the response
+401 i used to get unauthorised if user and pw was invalid
+500 internal server error if something went wrong or the validation failed
+404 if the method was not found/url incorrect
+
+#How were you returning the response back to postman,#How were you sending response back
+i was usnig response entity
+
+(they will ask mapping concept)
+
+#did you use any mapping concept in your project?
+Yes I did. I used OneToMany mapping, ManyToMany mapping, used OneToOne in bla bla bla
+
+(oops concept)
+
+#Where have you used oops concept in your project?
+used it in the service layer:abstraction, intheritance, polymorphasym. in Entity layer Encapsulation
+
+(below things are already in June batch they are already pre recorded)
+
+#What is hybernate?
+it is a orm tool
+
+#What is springMvC?
+when we develoup an application in spring boot we follow an architecture model, view, controller where we devide our application into 3 parts, and then we establish the communication between them
+
+#what is springIOC?
+#What is git and github?
+#did you deploy your api? how did you deploy your api?
+
+(collection questions)
+#What is the difference between arraylist and linked list?
+#What is the difference between hashmap and hashSet?
+#what is hashTable?
+#What is vector? what is Queue?
+#What is comparitor and comparible?
+
+(Explain your project)
+pick any project, in any project 4 modules you should know?
+you should know the last module you have develouped?
+what all modules did you develoup?
+what challanges did you face?
+What are the kinds of defects you got in your project?
+
+(annotations)
+why did you use @Configuration annotation. use chat gpt and explain in your own words. explain where you used it in your project.
+	when i develouped the spring secuirty layer, springConfuguraton i put that into the confuguration layer like which url who can access. use practicle example
+@Autowired
+What are the different ways to perform dependency injections.=
+@Autowired and @Consturctor based Dependency injecton.Which one is more effective
+@Component
+
+
+23:27
+
+#anything else if they ask 
+sir i dont know. I did not prepare with that. be bold. You still will be selected. sorry sir in my project i did not get opportunity to implement this, given an opportunity i would learn it and implement it. 
+	
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Give any coustom exception you created in your project?
+I created 2 coustom exceptions i.e.BlogApiException and ResourceNotFound Exception
+I used them in service layer with orElseThrow() to check whether the post object of a given postId exists or not. if not we got the exception.
+to create it
+	I created a class in Exceptions package which extends to RuntimeExcepions 
+	Used @ResponseStatus(value = HttpStatus.NOT_FOUND) annotation on top of it
+	Used a constructor inside the class to print message
+
+Model Mapper?
+Model Mapper is a Library (for example model mapper and mapstruct).
+It recuces the lines of code when we try to map contents of one object into another.
+normally to copy contents from dto to entity we use getters and setters, but we did that easily using model mapper library.
+for Implementing model mapper we
+	downloaded the dependency in prom.xml, 
+	created the @Bean of Model Mapper in @SpringBootApplication class because model mapper is an external library, not belonging to springIOC
+	created object of model mapper in service layer where we used it.
+
+How did you handle exceptoins?
+create a payload Class "ErrorDetails" with variables timestamp, message and details. Constructor based setters. Normal getters.
+craete a "GlobalException" class in Exceptions package which extends to ResponseEntityExceptionHandler class with @ControllerAdvice annotations
+create methods in that class which handle the individual exceptions. Use @ExceptoinHandler annotation
+
+btw 3 ways we used spring security in project (good to know)
+	first, where only dependencies are downloaded, and we have option of setting pw in application.properties or we could auto genereate pw.
+		session handling happens here by default
+	second, In Memory Authentication where we create objects to store username and pw.
+		btw does session handling happen in here by default or not?(i think no)
+	third, Database authentication we used it in the project
+
+How did you implement Security in your project? 
+I downloaded dependencies for spirngSecuirty by pasting the dependency tag in prom.xml
+I created 2 entity tables- User and Roles which used ManyToMany mapping, and created the 3rd table in DB user_roles
+created roles and user repository with hardcoded methods like findByUsernameOrEmail()
+created a class CustomUserDetailsService in secuitry package, which acts as service layer.
+the service layer class has a method which takes in username and pw and finds what role the user has. then it assigns the username,Pw and role to User Object of spring Secuiry framework
+create a class SecurityConfig in config package. This class tells spring that we will configure our own security settings.
+finally we assgin @PreAuthorize tag to methods in controller layer, to make those methods acceble according to their roles.
+
+(though i Know how it works i dont really know what this does till now )(i think it just checks what role you have depending on the username and pw. IF the credentials are right)
+(it spring secuirty authorises your code than what does sign-in features do?)
+
+btw till here we are doing sign-in using Authorize section in POSTMAN, and for sign-up we are hardcoding the values in DB. next we will do these using JSON objects.
+
+How did you develoup sign-in/login feature?
+create a login Dto in Payload package.
+create AuthController class in controller package. This will act as the controller layer for sign-in and sign-up.
+controler has a method which will take in the loginDto object, check wether the username and pw are right and generate a token.
+we make changes to securityConfig class situated in config package.
+	1	.antMatchers("/api/auth/**").permitAll()
+	2	  @Override
+   		  @Bean
+   		 public AuthenticationManager authenticationManagerBean() throws Exception {
+   		     return super.authenticationManagerBean();
+   		 }
+
+How did you develoup sigh-up feature?
+created sign-up dto in payload package.
+created a method of sign-up in AuthController, which takes in sign=up Dto object and checks wether the username and email already exists or not. If not then
+	it copies the informaton we gave in Dto object to User entity object and saves it to Repository.
+we could also assing the role while signing up but that part we havent develouped in this project.
+
+What is JWT token, how did you implement it?
+We use it to securily establish communication between the front end and the back end.
+Using it we have to sign it only once and we will get a token. using the token we'll be able to use the api as many times as we want.
+to implement JWT token we:
+	add the dependency in prom.xml
+	create class "JwtAuthenticationEntryPoint" in secutiry package.
+	Update application.properties file with JwtSecuirtyKey and expiration time.
+	create class "JwtAuthenticationFilter" in secutiry package which makes shure that authenticated users only can access the resources.
+	create Class "JwtTokenProvider" in security package which will generate token first time we login after we verify the credentials.
+	make changes to "sing-in" method in auth controller so that it returns token.
+	create class "JwtAuthResponse" in payload package.
+	
+Spring Valadation?
+earlier validation was done using Regular expressions but not in springboot we use spring valadation library
+to implement it:
+	download the dependencies in prom.xml file
+	add whichever valadation annotations we want on Dto class.
+	make changes to the controller layer method -@Valid, BindingResult
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+JWT TOKEN STEPS ADDITIONAL INFORMATION:-
+
+
+Step 1: Add the necessary dependencies to your project's pom.xml file
+This step is like adding new tools to your project. You need to update a special file called pom.xml and include
+ the dependencies you need for JWT token implementation.
+
+Step 2: Create a class called "JwtAuthenticationEntryPoint" in the security package
+Think of the security package as a special folder that holds important security-related classes. In this step, 
+you're creating a class that will handle any unauthorized requests to your project. It's like having a person who 
+says, "Hey, you can't come in without a valid pass!"
+
+Step 3: Update the application.properties file with JwtSecurityKey and expiration time
+The application.properties file contains important settings for your project. Here, you need to add two specific
+settings: JwtSecurityKey (a secret key for generating the JWT tokens) and an expiration time (how long the token
+is valid for). It's like writing down some important information for your project to use.
+
+Step 4: Create a class called "JwtAuthenticationFilter" in the security package
+This step is about creating a class that will check if users have a valid JWT token before allowing them to
+access certain resources in your project. It's like having a security guard who checks if people have the 
+correct pass before letting them enter certain areas.
+
+Step 5: Create a class called "JwtTokenProvider" in the security package
+In this step, you're creating a class that will generate the JWT token when a user logs in with their credentials.
+This class will also verify the user's credentials and create the token. It's like having a person who creates a 
+special pass for you after you prove who you are.
+
+Step 6: Update the "sign-in" method in the authentication controller
+This step involves making changes to the "sign-in" method in your authentication controller. Instead of just 
+returning a success message, you need to modify it to return the JWT token after a successful login. It's like the
+person who helps you get a special pass also giving you that pass.
+
+Step 7: Create a class called "JwtAuthResponse" in the payload package
+Whenever we signin and we are found to be valid user, this class will send a copy of the token to the postman for
+sending back in the next transaction varification porpose. It will represent the response containing the JWT token.
+It's like creating a special envelope to hold your pass and other important information.
+
+See
+when we sign-in for the first time:
+	we sign in using Postman Json object, spring secuirty and sign-in method in AuthController method.
+	we have jwt dependencies in place
+	we have our JwtSecret key and session timing in application.properties 
+	now in this step we just check our credentials using spring secuirty and 'JwtTokenProvider' class provides a token
+	and we make use of Sing-in method in auth controller with payload class 'AuthController' to send back a copy of jwt token to the postman for further use
+
+When we now do any crud opreation using the jwt token we genereatd during sign-in:
+	we make use of any controller layer class and controller layer method
+	'JwtAuthorisationEntryPoint' checks wether we have a jwt token with us
+	Application.properties has session timing and security key
+	'jwtAuthenticationFilter' will check wether we have valid JWTtoken before allowing us to use the controller layer method
+	then the controller layer method will run
+	
+Diffenrence between JwtAuthenticationEntryPoint JwtAuthenticationFilter.
+JwtAuthenticationEntryPoint is responsible for handling unauthorized requests and sending appropriate error responses, while the
+JwtAuthenticationFilter intercepts requests, performs the JWT authentication process, and sets the authenticated user in the 
+SecurityContextHolder. They work together to ensure that only authenticated requests with valid JWT tokens can access protected resources.
+
+JWT token brakedown:
+Header: The header of a JWT token contains information about the type of token and the algorithm used for signing the token. 
+	It is typically encoded as Base64Url.
+Payload: The payload of a JWT token contains the actual data or claims that are being transmitted. Claims can include information 
+	about the user, permissions, roles, or any other relevant data. Like the header, the payload is also Base64Url encoded.
+Signature: The signature is a cryptographic signature created by combining the encoded header, encoded payload, and a secret key
+	known only to the server. It is used to verify the integrity and authenticity of the token. The signature ensures that the 
+	token has not been tampered with during transmission.
+
+JwtSecretKey is used to generate the Signature of jwt token. Uses bla bla bla.
+
+what I understood of Spring security:
+there are 2 ways we did it 
+	first by creating an object in the security config to store username, Password and the respective role (we did it for understanding porpose)
+	second way is by creating DB tables, one table will have username and password etc, the second table will have the role and the third table will know which user had what role
+
+steps to implement it:=
+	download depepndency
+	create the 3 tables( create the roles and user entity using ManyToMany mapping)
+	create repository layer for roles and user
+	create service layer using boiler plate codes in the security package, which has a method in it which takes in the usrname and password and finds what role the user has,
+				 then it gives the information it found to springSecurity framework method(User)(2 methods with the same name dont get confused)
+	create security config class in config class in config package, which tells springBoot that we will confugure our own settings (what work does it do? ill tell later)
+	finally provide @Preauthorise tag to methods in Controller layer to make them accessable according to their roles to people.
+
+this is the backend part we developed, we still do not know how to send username, password and roles to the database. which is why we did it explicitly in dataBase
+	
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Annotations:-
+
+Hybernate:- first point for these annotations will be "It is a hybernate annotatoin"
+	@Data 
+		used to apply getters and setters. Part of Lambok.
+	@Entity 
+		Lets springBoot Know that this is a entity class.
+	@Table
+		used to define the details of the database table in an entity class. 
+		allows us to set entity class table name.
+	@Id 
+		used to tell that this field is the primary key of the entity class
+	@GneratedValue
+		used to automaticly generate values of pramary.
+
+Mapping hybernate-
+	@ManyToMany- This annotation is used to define a many-to-many relationship between two entities + placed on entity class object field
+	@OneToMany- same + mostly used on collection field
+	@ManyToOne- same + mostly used on collection field
+	@JoinTable- used with @ManyToMany annotation. Allows us to coustomise the name of the 3rd table(join table) and its columns(join column)
+	@JoinColumn - used with @ManyToOne or @OneToOne. Allows you to specify the name of the foreign key column, its referencing column, and other properties related to the column mapping.
+
+Exceptions class-
+	@ControllerAdvice(sts) 
+		used to handle exceptions in controller layer
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+		used on top of a method to give a Response Statuse to postman. 
+		used it to give HttpStatus.NOT_FOUND while I created cousom exceptions for the project.
+	@ControllerAdvice
+		Used for exception handling
+		When used on top of a class, any excpetion that occurs in the project, that exceptions object will come to this class.
+		the class will now act as a catch block
+	@ExceptionHandler(ResourceNotFoundException.class)
+		used for exception handling
+		we specify the type of exception a method handles useing this annotaton.
+		If any exception related to the specified exception occures. This method will run.		
+
+SpringValidation- these are spring valadatin annotations
+	@NotEmpty
+	@Email
+	... many more
+
+	@Valid
+
+Service layer
+	@Service - Indicates that the class is a service component. The class also is now maintined and managed by springIOC. now available for dependency injection.
+	@Override- used to check wither overrideing is happening or not.
+
+SpringBoot main file
+	@SpringBootApplication
+		Starting Point of springBoot Project where the program execution starts
+		the class with this annotation also acts as configuration class
+		
+	@Bean 
+	is applied on an method whenever we wanna create an object of external library class
+	we do this in configuration class (eg. @SpringBootApplicaton and @Configuraton or @Component) only 
+	eg.We created an object of Model mapper in Service layer by configuring Model mapper in @SpringBootApplicaton class using @Bean annotation
+
+Contoller layer
+	@Controller
+		is used for traditional web applications where view layer is rendered on the server-side.
+	@RestController
+		is used for building RESTful APIs that directly return data in a specific format (JSON) as the response.
+	@RequestMapping
+		
+	@RequestParam- querry parameter
+		used it while doing pagination. it is a querry parameter. supplied values after '?' in the url.
+	@RequestBody- querry parameter
+		used it to get Json object from postman
+	@PathVariable- path parameter
+		it is a path parameter, Used it to get id values from http url.
+
+	@Autowired
+		used it for doing dependency injection
+
+	@PostMapping
+	@GetMapping
+	@PutMapping
+	@DeleteMapping
+
+	@PreAuthorize("hasRole('ADMIN')")
+		we use it to give authorisation to perticular methods in the controller layer.
+
+	@Valid
+		used it in Spring Valadation, spring valadition will not get active without this annotation.
+
+Repository
+	@Repository
+
+config SecurityConfig
+	@Configuration 
+		Acts as configuration class to configure oject of external library using @Bean Annotation.
+	@EnableWebSecurity 
+		Tells spring that I do not want to go with the default web security concept, so enable this class for spring security configuration.
+	@EnableGlobalMethodSecurity(prePostEnabled = true)
+	@Bean
+		Is applied on a method when we want to create an object of external library
+		It is a method level annotation
+
+security 
+CustomUserDetailsService
+	@Service
+		Used to tell spring boot that this class is a service layer and is also now a component of SpringIOC eligible for Dependency injection.
+		
+Jwt token
+	@Component
+		It is a class level annotation
+		Any class with this annotation will belong to spring IOC and is maintained and managed by springBoot. Just like @Service @Controller etc.
+		so we can now do dependency of this class.
+		spring boot takes care of the complete lifecycle of an object.
+		Used this in EmailApi and JWT token
+	@Value
+		
+
+
+
+
+	
+		THE END	
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+STS Project  -  SpringBoot + Hybernate (with some api work in the end) - MarketingApp
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TECHNICAL FLOW OF THE PROJCET
+when we paste the url in browser while the project is running, jsp gets called then:
+
+	view -> controller -> service -> repository -> database
+
+
+
+
+STEPS
+
+	Created SpringStrarterProject with:
+			SpringDataJpa-Hybernate
+			MySqlDriver- jar file to connect to the DB (for sql i think)
+			Spring Web- REST api
+
+	Created a Database
+			nooneed to create a table it will be created automatically when we run the project after createing entity and giving the application.properties
+	
+	Created a entity class Lead (in entity package)
+			id , firstName, lastName, email, mobile.
+			Setters and getters
+			@Entity, @Table, @Id, @GeneratedValue, @Column
+			Create a Dto class
+		
+	Configure application.properties file-
+			url, username, password, ddl-auto=update
+
+			< above methods belong to hybernate >
+
+	Create a repository layer (interface)(in repository package)
+			LeadRepository extends JPARepository<Lead,Long>
+				
+	Create a Service Layer (in service package)
+			LeadService, LeadServiceImpl
+			@Service
+			@Autowired- LeadRepository
+
+	Create Controller layer (in controller package)
+			LeadController 
+			@Controller
+			@Autowired- LeadService
+			@RequestMapping("/name") :gets called by JSP or URL using @RequestMapping("/name") and return us to another JSP
+
+				@RequestMapping("/create")			the method gets called by http://localhost:8080/create
+				public String viewCreatedLead() {
+				return "create_lead";                	will send us to "create_lead" jsp (provide code in application. properties
+				}
+			
+			we can either call it using "http://localhost:8080/create" or by supplying "create" as action attribut in jsp.
+			
+			Methods:
+				createLeads-
+				saveLeads - 
+					@ModelAttribute Lead lead
+					ModelMap model-  model.addAttribute("msg","record saved") - ${msg}
+				getAllLeads-
+					Model model- model.addAttribute("lead",lead)
+				deleteLeads
+					@RequestParam("id") long id
+				updateLeads - 
+					will require cretion of 2 methods because we redirect to another jsp who takes in update values
+
+	Create view layers with jsps - src - main - webapp - WEB-INF - jsps/views
+			create
+			viewall- we used JSTL here
+				   used qurerry parameter here
+			update	
+				
+	Integrating Email API (in utility package)
+			EmailService , EmailServiceImpl
+			@Component
+			@Autowired - JavaMailSender
+					SimpleMailMessage
+			configure application.properties
+			add the dependency
+	
+	Crud with API- 
+			in controller package created a class LeadRestController
+			@RestContoller
+			@RequestMapping("/api/leads") on the class 		 http://localhost:8080/api/leads
+			@Autowired-LeadRepository 
+			@GetMapping, @PutMapping, @DeleteMapping, @PostMapping on individual methods
+				
+				@GetMapping
+				public List<Lead> getLeads(){
+				List<Lead>lead=lr.findAll();
+				return lead;
+				}
+
+			methods will be called by supplying URL in browser (for only get) or on Postman(for other methods)
+
+QUESTIONS
+	
+	=> How did you use "email API with springboot" in the project?
+	added the dependency jars in prom.xml.
+	configured applicaton.properties, provided it with the Email address that will be used to send email and provided it with the "app password".
+	i developed a utility layer and in it i supplied 3 fields email, subject and body. by doing this email is triggered
+	in the utility layer created EmailService and EmailServiceImpl with @Component annotation.
+	created a method sendEmail() and supplied it with emailId, title, and content.
+	used JavaMailSender in place of Repository layer and SimpleMailMessage instead of entity class.
+	
+	=> how API with crud was done in sts
+	we had added the SpringWeb dependency for Restful in the begining
+	created a class "LeadRestController" in controller package
+	@RestController
+	@RequestMapping on top of the table instead of on top of individual methods
+	and return the data directly to the frontend, in json object form
+
+	=> how did you implement Jstl tags?
+	dowonload and paste jstl jar in library (for eclipse)
+	in prom.xml add the dependency for jstl (in springboot)
+	copy and paste the directive tag on top of the jsp wher you will use jstl
+	
+	
+	=> what all steps belong to hybernate and what belong to springboot?
+	creating entity, and configuration of application.properties belong to hybernate.
+	Using Repository layer belongs to springboot.
+
+	=> how do you add hybernate jar to the project?
+	while createing the project we add SpringDataJpa.
+
+	=> CrudRepository vs JpaRepository
+	CrudRepository does not have features like Pagination
+	
+	=>Why dialect information is given in application.properties
+	because SQL querries varry for every database. So to provide right kind of information to the database.
+
+	=>@webservelet vs @RequestMapping
+	@webservlet is used in servlets, it is used to call that perticular servlet either from frontend or by ISC
+	@RequestMapping is used the controller layer in springboot on each method and in api it is used on the Whole class
+
+	=>difference between SpringBoot controller(@Controller) methods and API controller(@RestController) methods.(in context of my project, otherwise this qn is useless)
+	spring boot methods return the webpage where we will get our output, api methods directly return the output
+
+
+What i understood of springboot: 20:47 22-03-2023  (f5)
+
+1. after creating the Entity class and the Repository layer, and giving the applicaton.properties and creting a controller layer
+2. in the controller layer we just pass values into the Entity class 
+	i)  either by first creating an object of Entity class and using setters(first springboot project)
+	ii) or by creting a object of Entity class(created the obcect in the parameter) and passing values by matching the values using jsp, where we match the variable names with name attribute(second springboot project)
+3. Now finally we create a object of Repository using Autowired, use the inbuilt method it has to offer(like save), and pass the object address of entity class to the repository class method. (we do it in the service layer which is why it becomes slightly complicated)
+
+in the second project the only difference is that we use a service where we cerate the obcect of Repository using @Autowired
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Eclipse Project  -  Servlets + MVC () - MarketingApp
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+
+	NOT DONE. WILL DO LATER
+
+
+
+
+
+
+diffenence between working of Spring boot methods and api methods- spring boot methods return the webpage where we will get our output, api methods directly return the output,
+			we do not develoup the front end in here the Json object is directily given to the front end
+			Request mapping will be applied on the whole class instead of the method 
+

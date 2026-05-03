@@ -1,0 +1,194 @@
+/* Fullscreen Layout */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 1450px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px 10px 0 0;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Chat Box */
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0 0 10px 10px;
+    direction: ltr; /* Ensures text starts from left */
+}
+
+/* General message styles */
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/* User's message */
+.user-message {
+    background-color: #e4f7fd;
+    align-self: flex-end;
+    text-align: left;
+}
+
+/* AI's message */
+.ai-message {
+    background-color: #f4f4f4;
+    align-self: flex-start;
+    text-align: left;
+    dir: ltr;
+}
+
+/* Code block styling */
+.code-box {
+    background-color: #2d2d2d;
+    color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap; /* Ensures long code lines wrap correctly */
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+
+/* Input Box */
+.input-box {
+    display: flex;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 2px solid #ccc;
+    border-radius: 0 0 10px 10px;
+}
+
+.input-box input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.input-box button {
+    width: 20%;
+    padding: 10px;
+    border: none;
+    background-color: #008cba;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.input-box button#stop-btn {
+    background-color: #e74c3c;
+}
+
+/* Light and Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+}
+
+body.dark-mode .chat-container {
+    background-color: #333;
+}
+
+body.dark-mode .header {
+    background-color: #222;
+}
+
+body.dark-mode .chat-box {
+    background-color: #444;
+    color: white;
+}
+
+body.dark-mode .message {
+    background-color: #555;
+}
+
+body.dark-mode .user-message {
+    background-color: #3aafaf;
+}
+
+body.dark-mode .ai-message {
+    background-color: #777;
+}
+
+body.dark-mode .toggle-btn i {
+    color: white;
+}
+/* Default color for PrabhatGPT in Light Mode (Black) */
+#prabhat-gpt {
+    color: black;
+}
+
+/* Change color for PrabhatGPT in Dark Mode (Creamy White) */
+body.dark-mode #prabhat-gpt {
+    color: #f1e6d1; /* Creamy white color */
+}
+.message {
+    text-align: left; /* Ensure text starts from left */
+    direction: ltr; /* Left-to-right text flow */
+    display: block; /* Prevent inline display issues */
+}
+
+.user {
+    background-color: #007bff;
+    color: white;
+    text-align: right;
+}
+
+.ai {
+    background-color: #444;
+    color: white;
+    text-align: left; /* AI messages appear aligned to the left */
+}
+.disclaimer {
+    text-align: center;
+    font-size: 14px;
+    color: #ff0000;
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+

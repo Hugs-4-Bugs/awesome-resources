@@ -1,0 +1,73 @@
+crud 1. What are the kinds of defects you got in your project?
+
+Ans = Invalid Email Format application was accepting it.
+
+2. How were you fixed it ?
+
+Ans = Using SpringBoot Validation.
+
+3. How did you used:- I added the dependency (Spring Validation),  I used @Email Annotation, then I used the bindingResult.
+ then it work properly 
+ and I got the error message and gave back to the --->Postman.
+
+-----------------------------------------------------------X-----------------------------------------------------------------------------------------------
+2. What Challenges did you face?
+ Ans:- I initialised content using @NotNull annotation to not take (save) the null data, but there was bug in that. It was accepting the null values in content.
+for that II  used @NotEmpty annotation . using this annotation the bug got solved. and now its working proper.
+
+-----------------------------------------------------------X-----------------------------------------------------------------------------------------------
+3. pickup  project and explain last modules in that ?
+
+And:- The First module is 
+
+1) blog post crud Operation : 
+    # it offer end points for creating, managing accessing blog post. and that end points allow user to manage their post and view other user created blog.
+
+How you Implemented it: 
+  for posting a blog: 
+  firstly I created handler method in RestController layer where it taking the data from postman using @RequestMapping Annotation.
+  
+and pass it into DTO object later the DTO object data passed that into services layer where DTO object  will convert it into Entity class using model Mapper 
+class(library) .  after converting data into Entity it will moved to repository layer  and using repository and @PostMapping Annotation  it will save the object into Database.
+yes thats the process of posting a data into database.
+
+ for Getting all blog 
+
+ firstly I created one handler method as the name of getAllPosts. in that I am passed generic <> which will give me data in the form of DTO. when I heat the URL in postman for get data.
+it will passed to controller layer  then it will move to services layer. In services layer  the findALL() method in repository layer will call the list of blog 
+ which is save database. then using Stream API the entity object data (post) will convert it into DTO for that used stream().map function is used. it will convert it into Dto and this Dto 
+object will shown in Postman.
+
+
+for getting blog by id:
+
+firstly I created Handler method in that I passed @Path Variable annotation in which i passed(name = id). then this method will move to services layer. in services layer using
+ repository method i will call findById (id) method. in find by id method function i passed Id using Path variable so path variable will move to db and will help me to check the data based on
+ id once object it get. it will passed that data into entity and entity will convert that data into DTo and object will show in postman and passed 200 response code which say ok.
+
+For updating data by id :
+
+firstly I created one handler method in that i used @Requestbody annotation which will take the data from postman and in postman we also passed url in which we will declare id based on id wee 
+will update so for that I used @PathVariabe annotation after that it will move to services layer where we set the data (update)
+ in entity class. and after setting data. i will call post repository and it will save the data and will response back (200) ohk.
+
+for Delete blog:
+
+I created one handler method in that i passed  @Pathvariable. then it will move to services layer.  then in services layer post repository will check the id by using findById method.
+if id get . so post repository .delete method will call after deleting record. it will response back 200. ohk.
+thats all crud operation. and first module.
+______________________________________________________________________________________________________________________________________________________________________________________________________
+
+ 2) module Pagination and Sorting 
+
+for all blog in get mapping i will use @RequestParam annotation will pass pageNO, page size , sortBy, sortDir  value and sortBy  
+
+then for pageable, JPA repository has pageable instance.
+ so created pageable instance which has PageRequest.of method in which i passed pageNo, pageSize, sort argument. then post repository. find all method will call and  it will give me 
+ page numbers. 
+
+then for getting content for pageNo i will call entity.getContent method  it will get the content using stram. map method (which give me list of objects(posts)).
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________
+
+3)

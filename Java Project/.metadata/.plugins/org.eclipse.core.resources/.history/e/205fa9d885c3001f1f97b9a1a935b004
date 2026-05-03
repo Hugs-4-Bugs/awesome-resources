@@ -1,0 +1,5 @@
+package com.PrabhatDevLab.rest;
+
+public class WelcomeRest {
+
+}

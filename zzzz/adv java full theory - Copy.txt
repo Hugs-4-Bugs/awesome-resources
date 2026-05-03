@@ -1,0 +1,574 @@
+update, delete, getcommentbyid,
+modelmapper springvaladation ,
+exception handling in spring boot, 
+spring valadation, 
+spring security,
+authentication and authorisation, 
+jwt token, sign in api, sign up,
+deployment of the project on aws,
+then project, profiles (how to move the code to testing,develoupment,qa environment
+
+(25 more days)(before 25 may)
+
+resume prepairation will be offline
+
+5jan flight reservation
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			ADVANCE JAVA AND PROJECTS NOTES/ CHEET SHEET
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+	---PROJECTS---
+JDBC crud operaton
+	create a java project -> add jar file -> write JDBC codes in it
+	
+
+
+	---LEARN---
+JAR file/ connector file/ project dependency 
+	3 ways to add jar file:	download and extract and paste in lib folder (in eclipse)
+					paste code in prom xml (sts)(mysql Driver gives jar i think)
+					mysql Driver
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Tomcat
+
+what is a database- database is a software which store data in an organised way
+
+what is sql- is a language we use to interact with the database
+
+CRUD operation 
+
+Servlet -getParameter()
+
+ISC(inter servlet communicaton) getAttrabute(), getParameter()
+		when we run a servlet directly the get method runs, if we use a form we get to select what method will run, if we use a link 
+		ISC can be done by either using Request Dispatcher of by Session variable
+		RequestDispatcher
+		Sesson Variable
+
+request Dispatcher interface: (does thhis belong in j2ee)
+	used to forward the request to another resource that can be HTML, JSP or another servlet in same application
+	thre are two methods in this interface
+		void forward()
+		void include()
+	we can use this include the content of another resourse to the response
+
+sesson variable- once the variable is stored in it, it can be accesed across the application
+Request variable- can be accesed by another servlet only when we use request dispatcher
+
+JSP- Jakarta Server Pages
+	Scriplet tag- implicit objects
+	Declaration tag
+	Expression tag
+	Directive tag- Page Directive tag
+			   Includes Directive tag
+
+what are implicit objects
+	Java objects that JSP container makes available to the developers in each page and the developer can call them directly without explicitly declaring
+	9 types are there- request, response, session, out, config, appliation, page, pagecontext, exception
+
+MVC - Model View Controller
+
+DAO - Data Acess Object
+
+<lean to do the project> Learn the technical flow>
+
+
+Query parameters- used in combination with hyperlink tags
+
+Tomcat Container-
+
+Servlet Life cycle- init, services, destroy
+	what code do you write in init() method, destroy() method
+
+Servlets-defination-
+	
+JSP life cycle- jspTrnaslator init, services, destroy
+
+Application vs Web Servers
+
+doGet vs doPost
+
+steps to connect to database in JDBC
+	register driver class
+	creating connection
+	creating statement
+	executing querries
+	closing connection
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+springboot defination -
+	Spring Boot is an open-source Java framework designed to simplify the development of stand-alone, production-grade applications.
+	It allows develoupers to focus more on business logic and avoid boilerplate code as much as possible.
+
+Hybernate defination-
+	it is an ORM tool
+	it removes the dependeny while connecting with database
+	it reduces the number of lines of code when connecting with the database
+	we can do transisition to different database easily
+
+Hybernate use-
+	Object-Relational Mapping (ORM) framework for Java.
+	Maps Java objects to database tables.
+	Provides a database-independent abstraction layer.
+	Simplifies CRUD operations (create, retrieve, update, delete).
+	Includes caching mechanisms for improved performance.
+	Supports lazy loading and eager fetching strategies for managing object associations.
+	Integrates with transaction management frameworks.
+	Offers Hibernate Query Language (HQL) for writing object-oriented database queries.
+	Seamlessly integrates with Spring and Java EE frameworks.
+	Reduces the need for writing SQL queries and improves productivity in database-driven applications.
+
+advantages of ORM over JDBC-
+	applicaton development is fast
+	Details of sql querries are hidden
+	generates key automatically
+
+How we implemented hybernate in the project
+	Adding SpringDataJPA jars and mySQLdriver jar
+	creating entity class
+	adding database details in application.properties file
+
+How to connnect to database in springboot?
+	go to application.properties and specify 3 properties which are url, username, password
+
+
+JPA- (java persistance API)
+	is a concept that tells how ORM will be done in the project but implementation of that will be done by hybernate.
+
+why do we use sts now?
+	because it can create Spring Starter Project. Otherwise it is same as eclipse.
+	(btw we open the sprignStarterProjects by pasting the url not by running the html file)
+
+maven- It is a Repository
+	it has its own database
+	maven repository- is a location, where maven artifacts are stored and managed
+	makes project dependency(jar) downloading easier
+	go to mavenRepository.com downnload jar code and copy paste in the prom.xml in our project and the dependencied will get downloaded automaticaly
+
+What is ApplicationContext file? 
+	import org.springframework.context.ApplicationContext;
+	BeanFactory and ApplicationContext represent the Spring IoC Containers. ApplicationContext is the sub-interface of BeanFactory.
+	It represents the runtime environment for the application, where beans are instantiated, configured, and made available for use.
+
+
+what is DTO?
+	Data Treansfer Object
+	we can take form data and put it into this object, 
+	used so that we do not expose entity object everywhere other than service layer
+
+Repostory layer
+	helps to perform curd operation
+
+What is ORM 
+	ORM is a tool for parsing data between object to relation database table
+	it is capable of handling various operations like inserting, updating, deleting etc
+	It internally uses JDBC API to interact with the database.	
+
+ORM working : we create a table (entity) in database and create entity class with same name as that of the table.
+		  Entity class will have private variables whose name will match the DB table column names.
+		  Now we create a object of entity class with the values to put in the table, ORM will map those values to the DB table.
+		  By doing this we do not need to write any sql querries, if we need to add more data to the table, we create more new objects.
+
+CrudRepository
+	it is an interface which provides methods to perform operation on database, like insert, update, delete, create.
+
+JpaReposotory
+	it is also an interface. it provides all the methods of Crud repostory and has some additional methods like flush() saveflush() etc
+	it also allows pagination
+
+
+---------------------<lean to do the project>-----------------------
+ lean the technical flow of the project
+
+
+
+SpringDataJpa-Hybernate
+MySqlDriver- jar file (connecting to the DB)
+Spring Web- REST api
+
+(btw we did not add springBoot specific dependencies, may be becuause the project(sprignStarterProject) itself has SpringBoot)
+
+what part of the project was Hybernate? 
+	creating the entity layer, creating the Database and configuration of the application.properties file.
+
+Hybernate Annotations:-
+	@Entity
+	@Table
+	@Id
+	@GeneratedValue
+	@Column
+
+how does data from hybernate get stored in database?
+	using serialization and de-serialization
+
+How many ways to create immutable class in hybernate? //
+	making mutable=false
+	creating class by using @Immutable
+
+Explain Hybernate Architecture  ///
+	hybernate architecture consists of many object such as session factory, transision factory, connection factory, session transision
+	hybernte architecture is catogerised in 4 layers:
+		java applicaton layer
+		hibernate framework layer
+		backend api layer
+		database layer
+
+core interfaces of hybernate ///
+	configuration
+	session
+	sessonfactory
+	querry
+	criteria
+	transaction
+
+how are sqlQuerries created in hybernate? ///
+	session.createSQLQuerry
+
+session- A session represents database conncetion. it is not thread save, we do all CRUD opreation ///
+sessoin Factory- represents single database. It is thread safe.  ///
+
+
+
+What part of the project was SpringBoot?
+	the development of repository layer, service layer, controller layer.
+
+Spring Boot Annotations:-
+	@Autowired
+	@Controller
+	@RequestMapping
+	@ModelAttribute
+	@RequestParam
+	@PathVariable
+	@Service
+	@Component
+	@RestController
+	@PostMapping
+	@GetMapping
+	@DeleteMapping
+	@Putmapping
+	@RequestBody
+	@ModelMap
+	@Qualifire
+
+What is spring Intitalizer?  
+	it gives structure to SpringBoot project, so that it can be imported in tools like eclipse, Sts and Intillij
+	we used it in the begining of the sts project
+
+What is spring IOC?
+	it is an area in spring boot framework which performs dependency injection and is responsible for bean-lifecycle
+	Just like tomcat has Tomcat Container, which has logic to run servlets. Spring has SrprinIOC wich has logic to take care of objct creation when we use @Autowired.
+	the object created this way are thread safe and secure
+
+Dependency Injection- when @Autowired is used, the springIOC will automatically understand which objcet to create and inject in the address to the refference variable.
+				Normally to create objects of interface we would use upacasting. But in springBoot we use this.
+
+Bean LifeCycle:
+	when we use @Autowired springIOC container creates a bean and then it performs dependency injection.
+	After dependency injection is done, the very first method it runs is coustom init() method. Which runs only once.
+	Then coustom utility() method will run any number of time.
+	at last the coustom destroy() method will run and the bean life cycle will come to an end.
+	complete life cycle is maintained by spring IOC.
+
+difference between spring and springboot:
+	springBoot is a module of spring framework which simplifies use of spirng in java development
+	spring is the older version with lost of problems. to overcome those problems we came up with sprinboot
+	spring does tomcat configuraton seperately. sprinboot comes with embaded jasper tomcat.
+	confituraton in spring is complex because it used applicationContext.xml file. Springboot uses application.properties file
+	downloading dependencies is painfull in spring because for every frameworkd we have to download multiple dependency tags. To ovecome this in springBoot we use STARTER TAG.
+
+features/components of spring boot? //
+	spring intializer
+		can create an internal project sutructure for you.
+	spring boot starter
+		springBoot aggreagates common dependencies together and eventually improves productivity
+	sprinb boot autoConfiguration
+		automatically configures your springboot applicaton bsed on the jars you have added
+	spring boot CLI
+		It gives an interface to run springboot application with testing from the command prompt.
+	spring boot actuator
+		helps to monitor and manage your spring boot application
+	Logging and security:
+		This feature of SpringBoot, ensures that all the applications made using Spring Boot are properly secured without any hassle.
+
+What is starter tag?//
+	one tag gives all dependency
+	eg: if I want hibernate dependency, Ill add starter JPA tag that will give all dependencies of hybernate
+
+what is singelton design pattern
+	designing a class such that only one object of that class can be created
+	@Autowired follows singleton design pattern
+
+What is spring MVC
+	Spring forces us to build the application using MVC architecture
+	it has controller layer, model layer and view layer
+
+Advantages of Springboot:
+	makes developement of enterprise level application easier
+	by default comes with MVC architecture making development easier
+	has many built in logics that helps to do database connection in much simplified manner
+	sprinboot itself takes care of thread safety
+	it had good performance
+
+which collection interface you used in the project?
+	in sts project- List
+	in intellij- List and Set(for Many-to-Many mapping)
+
+where did you use oops in your project?
+	entity layer- Encapsulation
+	Service layer-Abstraction, inheritance, Polymerphism (runtime)
+
+how many ways to create object in java?
+	using new keyword
+	cloning
+	@Autowred
+
+J-Unit:(unit testing) @test, @Before, @After, @BeforeClass ,@AfterClass (blackbox testing, whitebox testing)
+	performs testing at code level
+
+what is unit testing -(testing at code level)
+	it is a way of testing individual unit of applicatoins to make sure that are working fine
+
+JSTL tags (Jakarta Standard Tag Libraries)- defination and how it works
+	Using JSTL tags we can read data and display it in the form of a table
+	it allows us to write java code in the form of tags making development easier
+
+types of JSTL tags: //
+	core tag
+	XML tag
+	SQL tag
+	Formatting tag
+	JSTL tag
+
+differnent error codes: 
+	400- bad request response, server cant process the request
+	404-not found response/ cant find the request resource
+	500- internal server error
+	200- sucess status response
+
+how did you handle excepton in your STS project (not sure)
+	@Controller Advice
+	try catch/throws
+
+@ControllerAdvice
+	can handle excepition in controller layer
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+
+API (Application Programming Interface)
+	any third party sorftware if we are integrating with our Application, it becomes API. example email api
+	api and webservice for use(api developers is same) we use it to make to different applicatons built on differernt technology interact with each other and share data
+	in our case we use api to make our backend be able to interact with any kind of front end technology.
+
+WebServices- (will be same as api but this is pdf defination)
+	helps integrate homegenous and hetrogenous application
+
+SOAP(Simple Object Access Protocol) vs REST(Representational State Transfer)
+		Xml(Extensable Markup Language)                 JSON- JavaScript Object Notation
+		complex to implement					easier to implement, understood by any broweser
+
+Monolythic Application:
+	the complete project is developed in one unit
+	all code written down in one place
+	dissadvantage is that overtime the code will increase in size and all the load of the project will be one the server
+	if server goes down the application goes down
+
+Microservices:
+	breaks larger applicaton into smaller mini projects
+	and then estiblashes communication between them using web services
+
+How do you consume web services: //
+	using rest tamplate class
+	
+
+REST 
+	REST is an architectural style that defines guidelines for designing networked applications.
+	It focuses on building scalable and stateless web services that can be accessed over the internet.
+	RESTful systems work on set of principles and constraints, including the use of HTTP methods (GET, POST, PUT, DELETE) for different-
+	operations, stateless communication, and a uniform interface
+
+RESTful
+	RESTful are web services or APIs that follow the principles and constraints of REST.
+	A RESTful API exposes data through a URL and allows clients to perform operations on these resources using standard HTTP methods.
+	RESTful APIs often return responses in common data formats like JSON or XML, making them easily consumed by clients across different platforms.
+
+what are the HTTP methods used in your project?
+	GET, POST, PUT, DELETE
+
+Structure of JSON object
+	{"name":"vaihbav","age":23, "car": null}
+
+what is the diffeerence between @RequestMapping applied on a class and @RequestMapping applied on a method?
+	when we apply @RequestMapping on a class the url is applied on all the methods of that class,
+	if applied on the method the URL is applicable to only that method.
+	In @RestController we used @RequestMapping on the class and on @Controller we used it on top of every method.
+
+--------------<Study the API-Intelij Project>----------------
+Technical flow of the project
+
+
+SpringDataJpa-Hybernate
+MySqlDriver- jar file
+Spring Web- REST api
+SpringBootDevTools- does live loading
+Lambok- Reduces lines of code(@Data-getter and sttters etc)
+
+what is Lambok-
+	it helps us to remove boiler plate code
+	when we add this dependency in Springboot we can use some annotations in place of getters and setters.
+
+Constructor based Injections
+
+What is @SpringBootApplication
+	The starting point where the programme execution starts in SprngBoot
+	is also the configuraton class
+	it is there in intellij and sts(the first class that gets auto created is of @SpringBootApplication) also.
+
+Stream API With lambdas Expression
+	filter(), map(), sorted(), distinct()
+	Give me an example where you used streamAPI and Lambdas expression in your project?
+
+HttpStatus Codes: (test these)
+	200 - OK : Get, Delete, Update (sucess status response)
+	201 - CREATED : Create
+	400- BAD_REQUEST response, server cant process the request  //// 
+	401 - Username/ Password Incorrect/ UNAUTHORISED
+	404 - URL incorrect (NOT_FOUND response/ cant find the request resource)
+	500 - Internal Server Error (INTERNAL_SERVER_ERROR)
+
+@PathVariable- pathParameter
+@RequestVariable- querryParameter
+@RequestBody-
+
+ModelMapper Library
+	How we add external library.
+	SpringIOC more points.
+	@Component - when we use component annotation above a class than that class will belong to SpringIOC, hense we will be able to create its object using @Autowired.
+	@SpringBootApplication - Starting point of the springBoot project. ALSO when we use @SpingBootApplicaton on a class that class becomes a configuration class.
+	@Bean - it is applied on a method when we want to create a object of an external library.
+
+Difference between @Component and @bean
+	@Component is a class level annotatoin and @Bean is a method level annotation
+	@Component need not be used with @Configuration annotation, but @Bean has to be used within the class that uses @Confuguration
+
+Scopes of Bean:-
+	singleton
+	prototype
+	request
+	session
+	globas session
+	
+
+java 8 feautres you used in the projcet, where when and how?
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+what are jsps? explain every tag
+mvc architecture
+tomcat container
+servlet life cycle
+doget vs do post
+jsp life cycle
+webserver vs application server
+what is maven 
+Junit and all annotations
+What is JPA what is hybernate?
+how did you use hybernate in the project
+how did you connect to the db in springboot
+what is jstl
+what is dto
+What is api
+Which api you used in your project and How?
+web services?
+soap vs rest
+structure of json object
+request mapping applied to a class and applied to a method
+monolythic application
+microservices
+how do you consume web services
+spring annotations= autowired controller ruquestMapping ModelAttribute requestParam Pathvariable service component restControler requestBody postmapping,get,delete,put, modelMap qualifire
+how does data from hybernate get stored in database?
+hybernate annotations= entity, table, Id ,generatedvalue, column
+spring Initializer
+spring ioc
+bin life cycle
+which collection you used in your porject
+what is application.context file
+what is @spirnBootApplicaotn
+spring vs spring boot
+what is starter tag?
+what is volatile keyword
+singleton desing pattern
+advantages of springboot
+what is optional classes
+@ControllerAdvice
+session variable vs request dispatcher
+what is jsp
+What is spring mvc
+how many ways we can create object in java
+how to create immutable classes in hybernate
+Explain hybernate architecture
+how do you expose and use web services
+which sever you used in the project
+where did you use oops concept in the project
+java 8 features////////////////
+differnt error codes
+what is stream API
+what is Lambok
+wahat are the core interfaces of Hybernate
+advantages of ORM over jdbc
+how to create sql queery in hybernate
+session vs session factory
+how do you debug in springboot
+components of sprinboot
+waht is REST api or RESTFUL api
+http methods used in our projct
+advantage of json
+soap and rest what is it
+types of jstl tags
+ways you can copy the form data
+what is hybernate
+what is generics 
+what is dto
+what is spring ioc
+@Component vs @Bean
+scopes of bean
+===============
+uses of init() method an destroy()
+what is sprinboot
+when to use interface and when to use abstract class
+what are implicit objects and its types
+feature of sprinboot
+what is maven repository
+what is unit testing
+what is ORM
+what is CRUD Repositroy
+what is JpaReposotyr
+steps to connect to database
+how to create coustom exception
+what is request dispatcher
+what are cookies
+What are the types of dependency injection...
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Webservices - web services has a potential to combine two heterogenous application(means php application send data to java
+Application).data exchanging is via web services.
+
+
+
+
+
+
+
+
+
+
+

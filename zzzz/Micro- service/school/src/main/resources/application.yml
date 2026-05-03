@@ -1,0 +1,26 @@
+
+spring:
+  application:
+    name: school
+  config:
+    import: optional:config-server:http://localhost:8888
+  datasource:
+    url: jdbc:mysql://localhost:3306/school
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8061
+application:
+ config:
+   students-url: http://localhost:8071/api/v1/student  # Corrected from student-url to students-url

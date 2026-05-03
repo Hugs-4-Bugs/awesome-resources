@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: student
+
+  config:
+    import: optional:configserver:http://localhost:8888  # Marks Config Server as optional; correct the URL if needed.
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/Student
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+
+  cloud:
+    config:
+      enabled: false  # Disables Spring Cloud Config if not in use.
+      import-check:
+        enabled: false  # Disables import-check to avoid configserver requirement.
+
+server:
+  port: 8071
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
