@@ -1,0 +1,14 @@
+Dear Hiring Manager,
+
+I am writing to apply for the {JOB_TITLE} position at {COMPANY}. With {EXPERIENCE}+ years of hands-on experience in Java backend development, I am confident in my ability to make a significant contribution to your engineering team.
+
+My technical skills span Java, Spring Boot, Hibernate, Microservices, REST API design, MySQL, AWS, and Docker. I have consistently delivered scalable solutions that meet business requirements while maintaining high code quality.
+
+I am particularly interested in this opportunity because it offers the chance to work on challenging backend problems and contribute to innovative solutions. I would be thrilled to discuss how my background aligns with your needs.
+
+Thank you for your time and consideration.
+
+Best regards,
+Prabhat Kumar
+Portfolio: https://prabhat-codes.vercel.app
+

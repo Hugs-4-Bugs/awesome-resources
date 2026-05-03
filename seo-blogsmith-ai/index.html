@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEO Blogsmith AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              primary: '#4f46e5', // Indigo 600
+              primaryDark: '#4338ca', // Indigo 700
+              surface: '#ffffff',
+              background: '#f8fafc',
+            },
+            boxShadow: {
+              'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+              'elegant': '0 10px 40px -10px rgba(0, 0, 0, 0.08)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Markdown Styles - Elegant Typography */
+      .markdown-body { color: #334155; line-height: 1.8; }
+      .markdown-body h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #1e293b; letter-spacing: -0.02em; line-height: 1.2; }
+      .markdown-body h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; color: #1e293b; letter-spacing: -0.01em; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+      .markdown-body h3 { font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #475569; }
+      .markdown-body p { margin-bottom: 1.5rem; font-size: 1.05rem; }
+      .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+      .markdown-body ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+      .markdown-body li { margin-bottom: 0.5rem; }
+      .markdown-body strong { font-weight: 600; color: #0f172a; }
+      .markdown-body blockquote { border-left: 4px solid #4f46e5; padding-left: 1.5rem; font-style: italic; color: #475569; margin: 2rem 0; background: #f8fafc; padding: 1.5rem; border-radius: 0 0.5rem 0.5rem 0; }
+      .markdown-body pre { background-color: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1.5rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+      .markdown-body code { font-family: monospace; background-color: #f1f5f9; color: #4f46e5; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-markdown": "https://esm.sh/react-markdown@^10.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

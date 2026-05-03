@@ -1,0 +1,13 @@
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the {JOB_TITLE} position at {COMPANY}. With {EXPERIENCE}+ years of experience as a Java Backend Engineer, I am excited about the opportunity to contribute to your team.
+
+My expertise includes Java, Spring Boot, Microservices, REST API development, and cloud technologies. I have a proven track record of designing and implementing scalable backend solutions that drive business value.
+
+I am particularly drawn to this role because it aligns with my passion for building robust, efficient systems. I would welcome the opportunity to discuss how my skills and experience can benefit {COMPANY}.
+
+Thank you for considering my application.
+
+Best regards,
+Prabhat Kumar
+

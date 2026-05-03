@@ -1,0 +1,5 @@
+{
+  "name": "ScriptVoice AI",
+  "description": "A professional script-to-speech tool for video production. Generate human-like voiceovers for your video scripts using Gemini 2.5.",
+  "requestFramePermissions": []
+}

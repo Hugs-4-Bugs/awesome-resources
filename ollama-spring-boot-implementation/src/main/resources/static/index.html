@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PrabhatGPT - AI Chat</title>
+    <!-- Link to Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="chat-container">
+    <div class="header">
+        <h1><span id="prabhat-gpt">PrabhatGPT</span></h1> <!-- Wrap PrabhatGPT in a span -->
+        <button id="toggle-mode-btn" class="toggle-btn">
+            <i id="mode-icon" class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div id="chat-box" class="chat-box">
+        <!-- Messages will appear here -->
+    </div>
+
+    <div class="input-box">
+        <input type="text" id="user-query" placeholder="Ask a question..." autocomplete="off" />
+        <button id="send-btn">Send</button>
+        <button id="stop-btn" style="display:none;">Stop</button>
+    </div>
+    <div class="disclaimer">
+        <p><strong>Disclaimer:</strong> PrabhatGPT is an AI-powered assistant and may generate incorrect or misleading responses. Always verify critical information from reliable sources.</p>
+    </div>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>

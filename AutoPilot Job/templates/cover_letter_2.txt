@@ -1,0 +1,13 @@
+Dear {COMPANY} Team,
+
+I am excited to apply for the {JOB_TITLE} position. As a Java Backend Engineer with {EXPERIENCE}+ years of experience, I bring a strong foundation in enterprise application development and microservices architecture.
+
+Throughout my career, I have successfully delivered high-performance backend systems using Java, Spring Boot, and modern cloud technologies. My experience with REST APIs, database optimization, and containerization makes me well-suited for this role.
+
+I am eager to bring my technical expertise and problem-solving skills to {COMPANY} and contribute to your innovative projects.
+
+Looking forward to the opportunity to discuss my qualifications further.
+
+Sincerely,
+Prabhat Kumar
+
