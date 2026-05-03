@@ -1,0 +1,20 @@
+.chat-interface {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  input {
+    padding: 8px;
+    flex: 1;
+  }
+  button {
+    padding: 8px;
+    cursor: pointer;
+  }
+  

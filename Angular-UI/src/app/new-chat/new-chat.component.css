@@ -1,0 +1,14 @@
+.new-chat {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  input {
+    flex: 1;
+    padding: 8px;
+  }
+  button {
+    padding: 8px;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,36 @@
+<div class="chat-window">
+    <div class="new-chat-section">
+      <input [(ngModel)]="newChatName" placeholder="Enter chat name" />
+      <button (click)="createNewChat()">Start New Chat</button>
+    </div>
+  
+    <div class="chat-list">
+      <div *ngFor="let chat of chats" (click)="currentChatId = chat.id">
+        <h3>{{ chat.name }}</h3>
+        <ul>
+          <li *ngFor="let message of chat.messages">{{ message }}</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="chat-interface">
+      <input [(ngModel)]="query" placeholder="Ask something..." />
+      <button (click)="sendQuery()">Send</button>
+      <button (click)="searchWeb()">Search</button>
+  
+      <div *ngIf="response">
+        <p><strong>AI Response:</strong> {{ response }}</p>
+      </div>
+  
+      <div *ngIf="searchResults.length > 0">
+        <p><strong>Search Results:</strong></p>
+        <ul>
+          <li *ngFor="let result of searchResults">{{ result }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
